@@ -1,0 +1,33 @@
+name = "dev-dauth-auth-api"
+type = "javascript"
+compatibility_date = "2022-01-04"
+
+account_id = "f4a9cf22f15c3a27a0eb97db22c0e1f8"
+zone_id = "5f9bacfc1b65d4597f657cbfc60a928c"
+target_type = "js"
+usage_model = "bundled"
+
+
+routes = ["dev.api.dauth.dev/walletAuth*", "dev.api.dauth.dev/auth*"]
+
+kv_namespaces = [
+  {binding = "ORG", id = "730ab38b94ea4655acb7544ad84ff1c4", preview_id = "ORG_DEV"}
+]
+
+
+[env.production]
+name = "dauth-auth-api"
+routes = ["api.dauth.dev/walletAuth*", "api.dauth.dev/auth*"]
+
+
+[build]
+command = "npm install && npm run build"
+[build.upload]
+format = "modules"
+main = "./shim.mjs"
+
+
+[durable_objects]
+bindings = [
+  { name = "WALLET", class_name = "Wallet" }
+]
